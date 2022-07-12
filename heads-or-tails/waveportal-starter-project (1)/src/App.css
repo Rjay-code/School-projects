@@ -1,0 +1,45 @@
+.body{
+display: flex;
+background-color: rgb(20, 19, 19);
+}
+
+
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 64px;
+  margin-bottom: 100%;
+
+}
+
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+}
+
+.header {
+  text-align: center;
+  color: rgb(13, 9, 255);
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.bio {
+  text-align: center;
+  color: rgb(13, 9, 255);
+  font-size: 20px;
+  margin-top: 16px;
+}
+
+.waveButton {
+  cursor: pointer;
+  margin-top: 16px;
+  padding: 8px;
+  border: 0;
+  border-radius: 5px;
+  color: rgb(9, 46, 255);
+  
+}
