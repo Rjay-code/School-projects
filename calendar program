@@ -1,0 +1,177 @@
+#include <iostream>
+using namespace std;
+#include <string>
+// takes in an year as an int and determines if that year is a leap year or not
+bool leap_year(int);
+// prints the calendar by month
+void print(int, int);
+//figures out the start day of the year
+int start_day(int);
+void setup();
+void setup1(int);
+void setup2();
+int setup3(int, int, bool);
+
+
+int main() 
+{
+  int year;
+  int start;
+  cout << "Please enter a year." << endl;
+  cin >> year;
+  start = start_day(year);
+  print(year,start);
+ 
+ 
+}
+
+
+ //determines if it is a leap year
+ bool leap_year(int x)
+ {
+   bool leap = false;
+   if(x%4 == 0)
+   {
+   leap = true;
+   }
+  if(x%100 == 0)
+   {
+     leap = false;
+     if(x%400 == 0)
+     leap = true;
+   }
+   if(leap)
+   {
+     cout << "This is a leap year.";
+   } 
+   else
+   {
+     cout << "This is not a leap year.";
+   }
+   return leap;
+ } 
+
+ //finds start day
+ int start_day(int x)
+ {
+   int years = x-1900;
+   int num = 0;
+   
+   for (int i = 0; i < years; i++)
+   {
+     num+=1;
+     if(i != 0)
+     {
+       if(i%4 == 0)
+       {
+         num+=1;
+       }
+       if(i%100 == 0)
+       {
+         if(i%400 == 0)
+         num+=1;
+       }
+     }
+   }
+  return num%7;
+ }
+ //print calendar
+ void print(int year, int start_day)
+ { 
+   bool is = leap_year(year);
+   cout << endl;
+   for(int i = 0; i < 12; i++)
+   {
+   setup1(i);
+   cout << " " << year << endl;
+   setup2();
+   cout << endl;
+   setup();
+   start_day = setup3(start_day, i, is);
+
+  
+   }
+
+ }
+ void setup()
+ {
+   //each day gets 4 spaces
+   cout << "----------------------------" << endl;
+ }
+ void setup1(int mon)
+ {
+   string months[12] = {"JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"};
+   int total = 28;
+   string temp = months[mon];
+   int size = temp.size();
+   int new_total = total-size;
+   new_total/=2;
+   for(int i = 0; i < new_total; i++)
+   {
+     cout << " ";
+   }
+   cout << temp;
+  }
+  void setup2()
+  {
+    string days[7] = {"Mo","Tu","We","Th","Fr","Sa","Su"};
+    int day;
+    for(int i = 6; i < 13; i++)
+    {
+      cout << "  " <<days[i%7];
+    }
+  }
+  int setup3(int start, int month, bool year)
+  {
+    int holder = start;
+    int total_days = 0;
+    int day = 1;
+    if(month == 1 && year)
+    {
+      total_days = 29;
+    }
+    else 
+    {
+      total_days = 28;
+    }
+    if(month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 ||month == 11)
+    {
+      total_days = 31;
+    }
+    if(month == 3 || month == 5 || month == 8)
+    {
+      total_days = 30;
+    }
+
+    string spaces[7]={"       ","           ","               ","                   ","                       ","                           ","   "};
+    cout << spaces[start] << day;
+    day++;
+
+    while(day <= total_days)
+    {
+     if (holder == 5)
+     {
+       cout << endl;
+     }
+  
+     if(day<10)
+     {
+       cout << "   " << day;
+       day++;
+       holder++;
+     }
+     else
+     {
+       cout << "  " << day;
+       day++;
+       holder++;
+     }
+     if (holder == 7)
+     {
+       holder = 0;
+     }
+    }
+    holder++;
+    cout << endl << endl;
+    return holder%7;
+  }
